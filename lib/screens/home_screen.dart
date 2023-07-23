@@ -15,15 +15,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Colors.teal,
+       // backgroundColor: Colors.teal,
+
         appBar: AppBar(
           title: Text(widget.title ?? 'home'),
           actions: [
             IconButton(onPressed: (){
-              Navigator.pushNamed(context, '/about_screen');
+              Navigator.pushNamed(context, '/about_screen',arguments: {'title':'عن التطبيق'});
             }, icon: Icon(Icons.info)),
             PopupMenuButton<int>(
               itemBuilder: (context) {
@@ -67,106 +69,118 @@ class _HomeScreenState extends State<HomeScreen> {
             incrementCounter();
           },
           child: Icon(Icons.add),
+
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage('images/soobha.jpg'),
-                radius: 50,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Card(
-                //بتخلي الكود
-                clipBehavior: Clip.antiAlias,
+        body: Container(
+          height:MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/downloadbac.png'),fit: BoxFit.cover
+            )
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/soobha.jpg'),
+                  radius: 50,
+                  //child: Text(_count.toString()),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Card(
+                  //بتخلي الكود
+                  clipBehavior: Clip.antiAlias,
 
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 5,
-                color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  elevation: 5,
+                  color: Colors.white,
 
-                margin: EdgeInsetsDirectional.only(
-                    // start: 30,
-                    // end: 30,
-                    bottom: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      //هي الي يتخلي النصين متباعدين
-                      child: Text(
-                        _alzker,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 22),
-                      ),
-                    ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(color: Colors.blue, boxShadow: [
-                        BoxShadow(
-                            offset: Offset(10, 0),
-                            color: Colors.black.withOpacity(0.14),
-                            blurRadius: 6)
-                      ]),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 7),
+                  margin: EdgeInsetsDirectional.only(
+                      // start: 30,
+                      // end: 30,
+                      bottom: 20),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        //هي الي يتخلي النصين متباعدين
                         child: Text(
-                          _count.toString(),
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.white,
-                          ),
+                          _alzker,
                           textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 22),
                         ),
                       ),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(color: Colors.teal, boxShadow: [
+                          BoxShadow(
+                              offset: Offset(10, 0),
+                              color: Colors.black.withOpacity(0.14),
+                              blurRadius: 6)
+                        ]),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 7),
+                          child: Text(
+                            _count.toString(),
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ElevatedButton(
+                      onPressed: () {
+                        incrementCounter();
+                      },
+                      child: Text('تسبيح'),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal,
+                          minimumSize: Size(0, 40),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomRight: Radius.circular(0),
+                            topLeft: Radius.circular(0),
+                            bottomLeft: Radius.circular(0),
+                          ))),
+                    )),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _count = 0;
+                        });
+                      },
+                      child: Text('الرجوع'),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(0, 40),
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                            topLeft: Radius.circular(0),
+                            bottomLeft: Radius.circular(10),
+                          ))),
                     )
                   ],
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                      child: ElevatedButton(
-                    onPressed: () {
-                      incrementCounter();
-                    },
-                    child: Text('تسبيح'),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        minimumSize: Size(0, 40),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(0),
-                          bottomLeft: Radius.circular(0),
-                        ))),
-                  )),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _count = 0;
-                      });
-                    },
-                    child: Text('الرجوع'),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(0, 40),
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(0),
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(0),
-                          bottomLeft: Radius.circular(10),
-                        ))),
-                  )
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
